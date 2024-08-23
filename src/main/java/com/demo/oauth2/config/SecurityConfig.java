@@ -1,5 +1,6 @@
 package com.demo.oauth2.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -15,6 +16,18 @@ import java.net.http.HttpRequest;
 @Configuration
 public class SecurityConfig {
 
+//    @Value("${oauth2.github.client_id}")
+//    private String githubClientId;
+//
+//    @Value("${oauth2.github.client_secrets}")
+//    private String githubClientSecrets;
+//
+//    @Value("${oauth2.facebook.client_id}")
+//    private String facebookClientId;
+//
+//    @Value("${oauth2.facebook.client_secrets}")
+//    private String facebookClientSecrets;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests((requests) ->
@@ -25,19 +38,20 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
-    @Bean
-    ClientRegistrationRepository clientRegistrationRepository(){
-
-        return new InMemoryClientRegistrationRepository();
-    }
-
-    private ClientRegistration githubClientRegistration() {
-        return CommonOAuth2Provider.GITHUB.getBuilder("github")
-                .clientId("").clientSecret("").build();
-    }
-
-    private ClientRegistration faceBookClientRegistration() {
-        return CommonOAuth2Provider.FACEBOOK.getBuilder("faceBook")
-                .clientId("").clientSecret("").build();
-    }
+//    @Bean
+//    ClientRegistrationRepository clientRegistrationRepository(){
+//        ClientRegistration gitHub = githubClientRegistration();
+//        ClientRegistration faceBook = faceBookClientRegistration();
+//        return new InMemoryClientRegistrationRepository(gitHub, faceBook);
+//    }
+//
+//    private ClientRegistration githubClientRegistration() {
+//        return CommonOAuth2Provider.GITHUB.getBuilder("github")
+//                .clientId(githubClientId).clientSecret(githubClientSecrets).build();
+//    }
+//
+//    private ClientRegistration faceBookClientRegistration() {
+//        return CommonOAuth2Provider.FACEBOOK.getBuilder("faceBook")
+//                .clientId(facebookClientId).clientSecret(facebookClientSecrets).build();
+//    }
 }
